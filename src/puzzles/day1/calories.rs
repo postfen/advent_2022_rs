@@ -1,16 +1,16 @@
-use std::fs::File;
-use std::io;
-use std::io::prelude::*;
-
 // https://adventofcode.com/2022/day/1
-
-fn main() {
-    let s = read_file_to_string("input").unwrap();
-    question_1(&s);
-    question_2(&s);
+pub fn print_solution() {
+    let s = include_str!("input");
+    let s1 = question_1(&s);
+    let s2 = question_2(&s);
+    println!(
+        "Day 1 - Calorie Counting\n\
+         A. {s1}\n\
+         B. {s2}\n"
+    )
 }
 
-fn question_1(s: &str) {
+pub fn question_1(s: &str) -> i32 {
     let mut count = 0;
     let mut max = 0;
     for line in s.lines() {
@@ -24,10 +24,10 @@ fn question_1(s: &str) {
             count += n;
         }
     }
-    println!("Highest Calories: {max}")
+    max
 }
 
-fn question_2(s: &str) {
+pub fn question_2(s: &str) -> i32 {
     let mut elves: Vec<i32> = vec![];
     let mut total = 0;
     for line in s.lines() {
@@ -39,11 +39,5 @@ fn question_2(s: &str) {
         }
     }
     elves.sort_by(|a, b| b.cmp(a));
-    println!("Sum of 3 Highest: {}", elves[0] + elves[1] + elves[2])
-}
-
-fn read_file_to_string(filename: &str) -> Result<String, io::Error> {
-    let mut s = String::new();
-    File::open(filename)?.read_to_string(&mut s)?;
-    Ok(s)
+    elves[0] + elves[1] + elves[2]
 }

@@ -15,7 +15,7 @@ impl Value for char {
     }
 }
 
-fn question_1(s: &str) {
+fn question_1(s: &str) -> i32{
     let mut total: i32 = 0;
     for line in s.lines() {
         let (a, b) = &line.split_at(line.len() / 2);
@@ -23,10 +23,10 @@ fn question_1(s: &str) {
         let b_set: HashSet<char> = b.chars().collect();
         total += a_set.bitand(&b_set).into_iter().next().unwrap().value() as i32;
     }
-    println!("{}", total)
+    total
 }
 
-fn question_2(s: &str) {
+fn question_2(s: &str) -> i32 {
     let mut total: i32 = 0;
     let mut lines = s.lines();
     while let (Some(a), Some(b), Some(c)) = (lines.next(), lines.next(), lines.next()) {
@@ -35,11 +35,17 @@ fn question_2(s: &str) {
         let c: HashSet<char> = c.chars().collect();
         total += c.bitand(&a.bitand(&b)).into_iter().next().unwrap().value() as i32;
     }
-    println!("{}", total)
+    total
 }
 
-fn main() {
+pub fn print_solution() {
     let s = include_str!("input");
-    question_1(&s);
-    question_2(&s);
+    let s1 = question_1(&s);
+    let s2= question_2(&s);
+    println!(
+        "Day 3 - Bags and Badges\n\
+        A. {s1}\n\
+        B. {s2}\n"
+    )
 }
+

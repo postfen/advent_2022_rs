@@ -1,8 +1,15 @@
 // https://adventofcode.com/2022/day/2
 
-use std::fs::File;
-use std::io;
-use std::io::prelude::*;
+pub fn print_solution() {
+    let s = include_str!("input");
+    let s1 = question_1(&s);
+    let s2 = question_2(&s);
+    println!(
+        "Day 2 - Rock Paper Scissors\n\
+        A. {s1}\n\
+        B. {s2}\n"
+    )
+}
 
 #[derive(Debug, Eq, PartialEq)]
 enum RPS {
@@ -69,29 +76,18 @@ impl Loses for RPS {
     }
 }
 
-fn main() {
-    let s = read_file_to_string("input").unwrap();
-    question_1(&s);
-    question_2(&s);
-}
 
-fn read_file_to_string(filename: &str) -> Result<String, io::Error> {
-    let mut s = String::new();
-    File::open(filename)?.read_to_string(&mut s)?;
-    Ok(s)
-}
-
-fn question_1(input: &str) {
+fn question_1(input: &str) -> i32{
     let mut total: i32 = 0;
     for line in input.lines() {
         let round = line.split(' ').collect::<Vec<&str>>();
         let (opp_hand, player_hand) = (parse_move(round[0]), parse_move(round[1]));
         total += calc_score(&player_hand, &opp_hand) as i32;
     }
-    println!("W/o Strategy:  {}", total);
+    total
 }
 
-fn question_2(input: &str) {
+fn question_2(input: &str)-> i32 {
     let mut total: i32 = 0;
     for line in input.lines() {
         let round = line.split(' ').collect::<Vec<&str>>();
@@ -99,7 +95,7 @@ fn question_2(input: &str) {
         let player_hand = get_strategic_move(&opp_hand, round[1]);
         total += calc_score(&player_hand, &opp_hand) as i32;
     }
-    println!("With Strategy: {}", total);
+    total
 }
 
 fn calc_score(p1: &RPS, p2: &RPS) -> u8 {
