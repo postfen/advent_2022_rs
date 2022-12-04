@@ -4,7 +4,7 @@ pub fn print_solution() {
     let s1 = question_1(&s);
     let s2 = question_2(&s);
     println!(
-        "Day 1 - Calorie Counting\n\
+        "--- Day 1: Calorie Counting ---\n\
          A. {s1}\n\
          B. {s2}\n"
     )

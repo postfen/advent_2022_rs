@@ -1,3 +1,4 @@
+// https://adventofcode.com/2022/day/3
 use std::collections::HashSet;
 use std::ops::BitAnd;
 
@@ -15,7 +16,7 @@ impl Value for char {
     }
 }
 
-fn question_1(s: &str) -> i32{
+fn question_1(s: &str) -> i32 {
     let mut total: i32 = 0;
     for line in s.lines() {
         let (a, b) = &line.split_at(line.len() / 2);
@@ -41,11 +42,10 @@ fn question_2(s: &str) -> i32 {
 pub fn print_solution() {
     let s = include_str!("input");
     let s1 = question_1(&s);
-    let s2= question_2(&s);
+    let s2 = question_2(&s);
     println!(
-        "Day 3 - Bags and Badges\n\
+        "--- Day 3: Rucksack Reorganization ---\n\
         A. {s1}\n\
         B. {s2}\n"
     )
 }
-
