@@ -22,7 +22,7 @@ impl<T: PartialOrd> Contains<T> for RangeInclusive<T> {
     }
 }
 
-fn to_i32_vec(line: &str) -> Vec<i32> {
+fn get_ranges(line: &str) -> Vec<i32> {
     let num_array: Vec<i32> = line
         .chars()
         .fold(String::new(), |mut num_str, next_char| {
@@ -43,10 +43,8 @@ fn to_i32_vec(line: &str) -> Vec<i32> {
 fn question_1(s: &str) -> i32 {
     let mut total = 0;
     for line in s.lines() {
-        let bounds = to_i32_vec(line);
-        if (bounds[0] <= bounds[2] && bounds[1] >= bounds[3])
-            | (bounds[2] <= bounds[0] && bounds[3] >= bounds[1])
-        {
+        let r = get_ranges(line);
+        if (r[0] <= r[2] && r[1] >= r[3]) | (r[2] <= r[0] && r[3] >= r[1]) {
             total += 1
         }
     }
@@ -56,9 +54,8 @@ fn question_1(s: &str) -> i32 {
 fn question_2(s: &str) -> i32 {
     let mut total = 0;
     for line in s.lines() {
-        let bounds = to_i32_vec(line);
-        if ((bounds[0]..=bounds[1]).contains_either(bounds[2], bounds[3]))
-            | ((bounds[2]..=bounds[3]).contains_either(bounds[0], bounds[1]))
+        let r = get_ranges(line);
+        if ((r[0]..=r[1]).contains_either(r[2], r[3])) | ((r[2]..=r[3]).contains_either(r[0], r[1]))
         {
             total += 1
         }
