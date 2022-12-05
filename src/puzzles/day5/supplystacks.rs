@@ -29,29 +29,6 @@ fn parse_moves(instructions: &str) -> Vec<Vec<usize>> {
         }).collect()
 }
 
-fn move_1(mut stacks: Vec<Vec<char>>, movelist: &Vec<Vec<usize>>) -> String {
-    for m in movelist {
-        for _i in 0..m[0]{
-            let cargo = stacks[m[1]-1].pop().unwrap();
-            stacks[m[2]-1].push(cargo);
-        }
-    }
-    get_top_boxes(&stacks)
-}
-
-fn move_2(mut stacks: Vec<Vec<char>>, movelist: &Vec<Vec<usize>>) -> String {
-    let mut holding_stack: Vec<char> = Vec::new();
-    for m in movelist {
-        for _i in 0..m[0]{
-            holding_stack.push(stacks[m[1]-1].pop().unwrap());
-        }
-        for _i in 0..m[0]{
-            stacks[m[2]-1].push(holding_stack.pop().unwrap())
-        }
-    }
-    get_top_boxes(&stacks)
-}
-
 fn get_top_boxes(stacks: &Vec<Vec<char>>) -> String {
     stacks.iter()
           .fold(String::new(), |mut answer_str, next_stack| {
@@ -61,10 +38,20 @@ fn get_top_boxes(stacks: &Vec<Vec<char>>) -> String {
 
 fn solve(s: &str) -> (String, String) {
     let (stack_map, movelist_raw) = s.split_once("\n\n").unwrap();
-    let (stacks, movelist) = (build_stack(stack_map), parse_moves(movelist_raw));
-    let s1 = move_1(stacks.clone(), &movelist);
-    let s2 = move_2(stacks.clone(), &movelist);
-    (s1, s2)
+    let (mut stacks, movelist) = (build_stack(stack_map), parse_moves(movelist_raw));
+    let mut holding_stack: Vec<char> = Vec::new();
+    let mut stacks2 = stacks.clone();
+    for m in movelist {
+        for _i in 0..m[0]{
+            holding_stack.push(stacks[m[1]-1].pop().unwrap());
+            let cargo = stacks2[m[1]-1].pop().unwrap();
+            stacks2[m[2]-1].push(cargo);
+        }
+        for _i in 0..m[0]{
+            stacks[m[2]-1].push(holding_stack.pop().unwrap())
+        }
+    }
+    (get_top_boxes(&stacks), get_top_boxes(&stacks2))
 }
 
 #[cfg(test)]
