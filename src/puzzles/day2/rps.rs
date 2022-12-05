@@ -75,8 +75,7 @@ impl Loses for RPS {
     }
 }
 
-
-fn question_1(input: &str) -> i32{
+fn question_1(input: &str) -> i32 {
     let mut total: i32 = 0;
     for line in input.lines() {
         let round = line.split(' ').collect::<Vec<&str>>();
@@ -86,7 +85,7 @@ fn question_1(input: &str) -> i32{
     total
 }
 
-fn question_2(input: &str)-> i32 {
+fn question_2(input: &str) -> i32 {
     let mut total: i32 = 0;
     for line in input.lines() {
         let round = line.split(' ').collect::<Vec<&str>>();

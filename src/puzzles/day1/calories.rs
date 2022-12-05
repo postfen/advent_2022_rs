@@ -10,7 +10,40 @@ pub fn print_solution() {
     )
 }
 
+
 pub fn question_1(s: &str) -> i32 {
+    let sum = s
+        .split("\n\n")
+        .map(|elf_load| {
+            {
+                elf_load
+                    .lines()
+                    .map(|x| x.parse::<i32>().unwrap_or_default())
+            }
+            .sum::<i32>()
+        })
+        .max()
+        .unwrap_or_default();
+    sum
+}
+
+pub fn question_2(s: &str) -> u32 {
+    let mut elves = s
+        .split("\n\n")
+        .map(|elf_load| {
+            elf_load
+                .lines()
+                .map(|x| x.parse::<u32>().unwrap_or_default())
+                .sum::<u32>()
+        })
+        .collect::<Vec<u32>>();
+
+    elves.sort_by(|a, b| b.cmp(a));
+    elves.iter().take(3).sum()
+}
+
+#[allow(dead_code)]
+fn question_1_v1(s: &str) -> i32 {
     let mut count = 0;
     let mut max = 0;
     for line in s.lines() {
@@ -27,7 +60,8 @@ pub fn question_1(s: &str) -> i32 {
     max
 }
 
-pub fn question_2(s: &str) -> i32 {
+#[allow(dead_code)]
+fn question_2_v1(s: &str) -> i32 {
     let mut elves: Vec<i32> = vec![];
     let mut total = 0;
     for line in s.lines() {
@@ -39,5 +73,18 @@ pub fn question_2(s: &str) -> i32 {
         }
     }
     elves.sort_by(|a, b| b.cmp(a));
+    println!("{} {} {}", elves[0], elves[1], elves[2]);
     elves[0] + elves[1] + elves[2]
+}
+
+#[cfg(test)]
+#[test]
+fn test_day1_a() {
+    let s = include_str!("test_input");
+    assert_eq!(question_1(&s), 24000);
+}
+#[test]
+fn test_day1_b() {
+    let s = include_str!("test_input");
+    assert_eq!(question_2(&s), 45000);
 }
