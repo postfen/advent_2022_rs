@@ -8,8 +8,6 @@ pub fn print_solution() {
 fn build_stack(boxes: &str) -> Vec<Vec<char>> {
     let (boxes, amt_str) = boxes.split_once("1").unwrap();
     let amt = amt_str.trim().split(" ").last().unwrap().parse::<i32>().unwrap();
-
-    // Create stacks (How to initialize these in one line? )
     let mut stacks: Vec<Vec<char>> = Vec::new();
     for _i in 0..amt {
         stacks.push(Vec::new())
@@ -31,50 +29,41 @@ fn parse_moves(instructions: &str) -> Vec<Vec<usize>> {
         }).collect()
 }
 
-fn move_boxes(mut stacks: Vec<Vec<char>>, tasklist: &Vec<Vec<usize>>) -> String {
-    for task in tasklist {
-        let amt = task[0];
-        let sender = task[1] - 1;
-        let receiver = task[2] - 1;
-        for _i in 0..amt {
-            let cargo = stacks[sender].pop().unwrap();
-            stacks[receiver].push(cargo);
+fn move_1(mut stacks: Vec<Vec<char>>, movelist: &Vec<Vec<usize>>) -> String {
+    for m in movelist {
+        for _i in 0..m[0]{
+            let cargo = stacks[m[1]-1].pop().unwrap();
+            stacks[m[2]-1].push(cargo);
         }
     }
     get_top_boxes(&stacks)
 }
 
-fn move_boxes_ordered(mut stacks: Vec<Vec<char>>, tasklist: &Vec<Vec<usize>>) -> String {
+fn move_2(mut stacks: Vec<Vec<char>>, movelist: &Vec<Vec<usize>>) -> String {
     let mut holding_stack: Vec<char> = Vec::new();
-    for task in tasklist {
-        let amt = task[0];
-        let sender = task[1] - 1;
-        let receiver = task[2] - 1;
-        for _i in 0..amt {
-            holding_stack.push(stacks[sender].pop().unwrap());
+    for m in movelist {
+        for _i in 0..m[0]{
+            holding_stack.push(stacks[m[1]-1].pop().unwrap());
         }
-        for _i in 0..amt {
-            stacks[receiver].push(holding_stack.pop().unwrap())
+        for _i in 0..m[0]{
+            stacks[m[2]-1].push(holding_stack.pop().unwrap())
         }
     }
     get_top_boxes(&stacks)
 }
 
 fn get_top_boxes(stacks: &Vec<Vec<char>>) -> String {
-    stacks
-        .iter()
-        .fold(String::new(), |mut answer_str, next_stack| {
+    stacks.iter()
+          .fold(String::new(), |mut answer_str, next_stack| {
             answer_str.push(next_stack.last().unwrap().to_owned());
-            answer_str
-        })
+            answer_str})
 }
 
 fn solve(s: &str) -> (String, String) {
     let (stack_map, movelist_raw) = s.split_once("\n\n").unwrap();
-    let stacks = build_stack(stack_map);
-    let movelist = parse_moves(movelist_raw);
-    let s1 = move_boxes(stacks.clone(), &movelist);
-    let s2 = move_boxes_ordered(stacks.clone(), &movelist);
+    let (stacks, movelist) = (build_stack(stack_map), parse_moves(movelist_raw));
+    let s1 = move_1(stacks.clone(), &movelist);
+    let s2 = move_2(stacks.clone(), &movelist);
     (s1, s2)
 }
 
