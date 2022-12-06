@@ -18,4 +18,5 @@ pub fn display_solutions() {
     day3::bags::print_solution();
     day4::campcleanup::print_solution();
     day5::supplystacks::print_solution();
+    day6::tuningtrouble::print_solution();
 }
