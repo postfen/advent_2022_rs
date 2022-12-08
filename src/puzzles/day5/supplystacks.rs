@@ -51,8 +51,14 @@ fn solve(s: &str) -> (String, String) {
             stacks[m[2]-1].push(holding_stack.pop().unwrap())
         }
     }
-    (get_top_boxes(&stacks), get_top_boxes(&stacks2))
+    (get_top_boxes(&stacks2), get_top_boxes(&stacks))
 }
+
+
+
+
+
+
 
 #[cfg(test)]
 #[test]
