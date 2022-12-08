@@ -19,4 +19,5 @@ pub fn display_solutions() {
     day4::campcleanup::print_solution();
     day5::supplystacks::print_solution();
     day6::tuningtrouble::print_solution();
+    day7::nospaceleftondevice::print_solution();
 }
