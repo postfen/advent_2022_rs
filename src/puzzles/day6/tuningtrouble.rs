@@ -9,8 +9,8 @@ pub fn print_solution() {
 
 fn solve(s: &str, size: usize) -> usize {
     s.chars().collect::<Vec<char>>().windows(size)
-     .position(|x| HashSet::<char>::from_iter(x.iter().copied()).len() == size)
-     .map(|x| x + size)
+     .position(|w| HashSet::<char>::from_iter(w.iter().copied()).len() == size)
+     .map(|i| i + size) // get last position in window
      .unwrap()
 }
 
@@ -22,14 +22,10 @@ fn test_day6_1() {
     let test2 = "nppdvjthqldpwncqszvftbrmjlhg";
     let test3 = "nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg";
     let test4 = "zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw";
-    let s1 = solve(test1, amt);
-    let s2 = solve(test2, amt);
-    let s3 = solve(test3, amt);
-    let s4 = solve(test4, amt);
-    assert_eq!(s1, 5);
-    assert_eq!(s2, 6);
-    assert_eq!(s3, 10);
-    assert_eq!(s4, 11);
+    assert_eq!(solve(test1, amt), 5);
+    assert_eq!(solve(test2, amt), 6);
+    assert_eq!(solve(test3, amt), 10);
+    assert_eq!(solve(test4, amt), 11);
 }
 
 #[test]
@@ -40,16 +36,11 @@ fn test_day6_2() {
     let test3 = "nppdvjthqldpwncqszvftbrmjlhg";
     let test4 = "nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg";
     let test5 = "zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw";
-    let s1 = solve(test1, amt);
-    let s2 = solve(test2, amt);
-    let s3 = solve(test3, amt);
-    let s4 = solve(test4, amt);
-    let s5 = solve(test5, amt);
-    assert_eq!(s1, 19);
-    assert_eq!(s2, 23);
-    assert_eq!(s3, 23);
-    assert_eq!(s4, 29);
-    assert_eq!(s5, 26);
+    assert_eq!(solve(test1, amt), 19);
+    assert_eq!(solve(test2, amt), 23);
+    assert_eq!(solve(test3, amt), 23);
+    assert_eq!(solve(test4, amt), 29);
+    assert_eq!(solve(test5, amt), 26);
     // let s = include_str!("test_input");
     // let s2 = solve(s).0;
 }
