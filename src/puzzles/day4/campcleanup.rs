@@ -1,6 +1,6 @@
 pub fn print_solution() {
     let s = include_str!("input");
-    let (a1, a2) = solve(&s);
+    let (a1, a2) = solve(s);
     println!("--- Day 4: Camp Cleanup ---\nA.  {a1}\nB.  {a2}\n")
 }
 

@@ -39,7 +39,8 @@ fn q2(dirs: &mut HashMap<String, i32>) -> i32 {
     let mut space_needed = 30000000i32 - space_free;
     dirs.retain(|_k, v| v >= &mut space_needed);
     let mut x = dirs.values().collect::<Vec<&i32>>();
-    x.sort_by(|a, b| a.cmp(&b));
+    x.sort();
+
     *x[0]
 }
 

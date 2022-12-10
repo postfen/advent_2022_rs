@@ -1,8 +1,8 @@
 // https://adventofcode.com/2022/day/2
 pub fn print_solution() {
     let s = include_str!("input");
-    let s1 = question_1(&s);
-    let s2 = question_2(&s);
+    let s1 = question_1(s);
+    let s2 = question_2(s);
     println!(
         "--- Day 2: Rock Paper Scissors ---\n\
         A. {s1}\n\

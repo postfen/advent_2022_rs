@@ -9,9 +9,9 @@ trait Value {
 impl Value for char {
     fn value(&self) -> u8 {
         if self.is_lowercase() {
-            return *self as u8 - b'`'; // a -> 1
+            *self as u8 - b'`' // a -> 1
         } else {
-            return *self as u8 - b'&'; // A -> 27
+            *self as u8 - b'&' // A -> 27
         }
     }
 }
@@ -41,8 +41,8 @@ fn question_2(s: &str) -> i32 {
 
 pub fn print_solution() {
     let s = include_str!("input");
-    let s1 = question_1(&s);
-    let s2 = question_2(&s);
+    let s1 = question_1(s);
+    let s2 = question_2(s);
     println!(
         "--- Day 3: Rucksack Reorganization ---\n\
         A. {s1}\n\

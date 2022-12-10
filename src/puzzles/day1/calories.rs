@@ -1,8 +1,8 @@
 // https://adventofcode.com/2022/day/1
 pub fn print_solution() {
     let s = include_str!("input");
-    let s1 = question_1(&s);
-    let s2 = question_2(&s);
+    let s1 = question_1(s);
+    let s2 = question_2(s);
     println!(
         "--- Day 1: Calorie Counting ---\n\
          A. {s1}\n\
@@ -47,7 +47,7 @@ fn question_1_v1(s: &str) -> i32 {
     let mut count = 0;
     let mut max = 0;
     for line in s.lines() {
-        if line.len() == 0 {
+        if line.is_empty() {
             if count > max {
                 max = count;
             }
@@ -65,7 +65,7 @@ fn question_2_v1(s: &str) -> i32 {
     let mut elves: Vec<i32> = vec![];
     let mut total = 0;
     for line in s.lines() {
-        if line.len() == 0 {
+        if line.is_empty() {
             elves.push(total);
             total = 0;
         } else {
@@ -81,10 +81,10 @@ fn question_2_v1(s: &str) -> i32 {
 #[test]
 fn test_day1_a() {
     let s = include_str!("test_input");
-    assert_eq!(question_1(&s), 24000);
+    assert_eq!(question_1(s), 24000);
 }
 #[test]
 fn test_day1_b() {
     let s = include_str!("test_input");
-    assert_eq!(question_2(&s), 45000);
+    assert_eq!(question_2(s), 45000);
 }
