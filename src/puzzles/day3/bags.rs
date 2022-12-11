@@ -22,7 +22,7 @@ fn question_1(s: &str) -> i32 {
         let (a, b) = &line.split_at(line.len() / 2);
         let a_set: HashSet<char> = a.chars().collect();
         let b_set: HashSet<char> = b.chars().collect();
-        total += a_set.bitand(&b_set).into_iter().next().unwrap().value() as i32;
+        total += i32::from(a_set.bitand(&b_set).into_iter().next().unwrap().value());
     }
     total
 }
@@ -34,7 +34,7 @@ fn question_2(s: &str) -> i32 {
         let a: HashSet<char> = a.chars().collect();
         let b: HashSet<char> = b.chars().collect();
         let c: HashSet<char> = c.chars().collect();
-        total += c.bitand(&a.bitand(&b)).into_iter().next().unwrap().value() as i32;
+        total += i32::from(c.bitand(&a.bitand(&b)).into_iter().next().unwrap().value());
     }
     total
 }
@@ -47,5 +47,5 @@ pub fn print_solution() {
         "--- Day 3: Rucksack Reorganization ---\n\
         A. {s1}\n\
         B. {s2}\n"
-    )
+    );
 }

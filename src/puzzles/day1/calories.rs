@@ -7,11 +7,11 @@ pub fn print_solution() {
         "--- Day 1: Calorie Counting ---\n\
          A. {s1}\n\
          B. {s2}\n"
-    )
+    );
 }
 
 
-pub fn question_1(s: &str) -> i32 {
+fn question_1(s: &str) -> i32 {
     let sum = s
         .split("\n\n")
         .map(|elf_load| {
@@ -27,7 +27,7 @@ pub fn question_1(s: &str) -> i32 {
     sum
 }
 
-pub fn question_2(s: &str) -> u32 {
+fn question_2(s: &str) -> u32 {
     let mut elves = s
         .split("\n\n")
         .map(|elf_load| {

@@ -1,3 +1,5 @@
+#![warn(clippy::all, clippy::pedantic)]
+
 pub mod puzzles;
 use crate::puzzles::*;
 
@@ -9,7 +11,7 @@ pub fn print_header() {
   │     By postfen      │
   └─────────────────────┘
 "#
-    )
+    );
 }
 pub fn display_solutions() {
     print_header();
@@ -20,4 +22,5 @@ pub fn display_solutions() {
     day5::supplystacks::print_solution();
     day6::tuningtrouble::print_solution();
     day7::nospaceleftondevice::print_solution();
+    day8::treetoptreehouse::print_solution();
 }

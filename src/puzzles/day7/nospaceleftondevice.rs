@@ -4,7 +4,7 @@ pub fn print_solution() {
     let mut s = build_dirs(include_str!("input"));
     let s1 = q1(&s);
     let s2 = q2(&mut s);
-    println!("--- Day 7: No Space Left On Device ---\nA. {s1}\nB. {s2}\n")
+    println!("--- Day 7: No Space Left On Device ---\nA. {s1}\nB. {s2}\n");
 }
 
 fn build_dirs(s: &str) -> HashMap<String, i32> {
@@ -17,7 +17,7 @@ fn build_dirs(s: &str) -> HashMap<String, i32> {
                 if cmd[2] == ".." {
                     curr_dir.pop();
                 } else {
-                    curr_dir.push(cmd[2])
+                    curr_dir.push(cmd[2]);
                 }
             }
         } else if cmd[0].parse::<i64>().is_ok() {
@@ -31,16 +31,15 @@ fn build_dirs(s: &str) -> HashMap<String, i32> {
 }
 
 fn q1(dirs: &HashMap<String, i32>) -> i32 {
-    dirs.values().filter(|&&x| x <= 100000).sum()
+    dirs.values().filter(|&&x| x <= 100_000).sum()
 }
 
 fn q2(dirs: &mut HashMap<String, i32>) -> i32 {
-    let space_free = 70000000i32 - dirs.get("").unwrap();
-    let mut space_needed = 30000000i32 - space_free;
+    let space_free = 70_000_000_i32 - dirs.get("").unwrap();
+    let mut space_needed = 30_000_000_i32 - space_free;
     dirs.retain(|_k, v| v >= &mut space_needed);
     let mut x = dirs.values().collect::<Vec<&i32>>();
     x.sort();
-
     *x[0]
 }
 
@@ -49,12 +48,12 @@ fn q2(dirs: &mut HashMap<String, i32>) -> i32 {
 fn test_day5_1() {
     let s = build_dirs(include_str!("test_input"));
     let s1 = q1(&s);
-    assert_eq!(s1, 95437);
+    assert_eq!(s1, 95_437);
 }
 
 #[test]
 fn test_day5_2() {
     let mut s = build_dirs(include_str!("test_input"));
     let s2 = q2(&mut s);
-    assert_eq!(s2, 24933642);
+    assert_eq!(s2, 24_933_642);
 }

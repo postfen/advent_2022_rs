@@ -17,29 +17,30 @@ fn print_map(treemap:&Vec<&str>){
         for char in r.chars(){
             print!("{char}")
         }
-        println!("");
+        println!();
     }
 }
 
 fn q1(s: &str) -> i32 {
-    0
+    s.parse().unwrap_or_default()
 }
 
 fn q2(s: &str) -> i32 {
-    0
+    s.parse().unwrap_or_default()
 }
 
 #[cfg(test)]
 #[test]
 fn test_day5_1() {
+    print_solution();
     let s = include_str!("test_input");
-    let s1 = q1(&s);
+    let s1 = q1(s);
     assert_eq!(s1, 16);
 }
 
 #[test]
 fn test_day5_2() {
     let s = include_str!("test_input");
-    let s2 = q2(&s);
+    let s2 = q2(s);
     assert_eq!(s2, 95437);
 }

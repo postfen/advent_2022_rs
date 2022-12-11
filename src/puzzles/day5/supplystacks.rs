@@ -2,7 +2,7 @@
 pub fn print_solution() {
     let s = include_str!("input");
     let (s1, s2) = solve(s);
-    println!("--- Day 5: Supply Stacks ---\nA. {s1}\nB. {s2}\n")
+    println!("--- Day 5: Supply Stacks ---\nA. {s1}\nB. {s2}\n");
 }
 
 fn build_stack(boxes: &str) -> Vec<Vec<char>> {
@@ -16,12 +16,12 @@ fn build_stack(boxes: &str) -> Vec<Vec<char>> {
         .unwrap();
     let mut stacks: Vec<Vec<char>> = Vec::new();
     for _i in 0..amt {
-        stacks.push(Vec::new())
+        stacks.push(Vec::new());
     }
     for line in boxes.lines().rev() {
-        for (j, c) in line.chars().enumerate() {
-            if c.is_alphabetic() {
-                stacks[j / 4].push(c)
+        for (j, c) in line.bytes().enumerate() {
+            if c.is_ascii_alphabetic() {
+                stacks[j / 4].push(c as char);
             }
         }
     }
@@ -59,7 +59,7 @@ fn solve(s: &str) -> (String, String) {
             stacks2[m[2] - 1].push(cargo);
         }
         for _i in 0..m[0] {
-            stacks[m[2] - 1].push(holding_stack.pop().unwrap())
+            stacks[m[2] - 1].push(holding_stack.pop().unwrap());
         }
     }
     (get_top_boxes(&stacks2), get_top_boxes(&stacks))
@@ -74,7 +74,7 @@ fn test_day5_1() {
 }
 #[test]
 fn test_day5_2() {
-    let s = include_str!("test_input");
+    let s: &str = include_str!("test_input");
     let s2 = solve(s).1;
     assert_eq!(s2, "MCD");
 }

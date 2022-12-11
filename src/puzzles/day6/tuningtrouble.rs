@@ -4,12 +4,12 @@ pub fn print_solution() {
     let s = include_str!("input");
     let s1 = solve(s, 4);
     let s2 = solve(s, 14);
-    println!("--- Day 6: Tuning Trouble ---\nA. {s1}\nB. {s2}\n")
+    println!("--- Day 6: Tuning Trouble ---\nA. {s1}\nB. {s2}\n");
 }
 
 fn solve(s: &str, size: usize) -> usize {
     s.chars().collect::<Vec<char>>().windows(size)
-     .position(|w| HashSet::<char>::from_iter(w.iter().copied()).len() == size)
+     .position(|w| w.iter().copied().collect::<HashSet<char>>().len() == size)
      .map(|i| i + size) // get last position in window
      .unwrap()
 }
