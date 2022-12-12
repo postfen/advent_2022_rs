@@ -15,12 +15,12 @@ pub fn print_header() {
 }
 pub fn display_solutions() {
     print_header();
-    day1::calories::print_solution();
-    day2::rps::print_solution();
-    day3::bags::print_solution();
-    day4::campcleanup::print_solution();
-    day5::supplystacks::print_solution();
-    day6::tuningtrouble::print_solution();
-    day7::nospaceleftondevice::print_solution();
+    // day1::calories::print_solution();
+    // day2::rps::print_solution();
+    // day3::bags::print_solution();
+    // day4::campcleanup::print_solution();
+    // day5::supplystacks::print_solution();
+    // day6::tuningtrouble::print_solution();
+    // day7::nospaceleftondevice::print_solution();
     day8::treetoptreehouse::print_solution();
 }
