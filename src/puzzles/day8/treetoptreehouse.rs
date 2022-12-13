@@ -59,8 +59,7 @@ impl fmt::Display for Treemap {
 // fn visible_from_outside(tree: Tree, treemap: &Treemap) -> bool {
 fn visible_from_outside(tree: u32, col: usize, row: usize, treemap: &Treemap) -> bool {
     let mut seen = (0, 0, 0, 0); // up, down, left, right
-                                 // println!("N: ({}, {} : {})", row, col, tree );
-                                 // Up
+    // Up
     for n in 0..row {
         if treemap.grid[n][col] >= tree {
             seen.0 += 1;
@@ -91,7 +90,6 @@ fn visible_from_outside(tree: u32, col: usize, row: usize, treemap: &Treemap) ->
         }
     }
 
-    // println!("N: {:?}", seen);
     [seen.0, seen.1, seen.2, seen.3].contains(&0)
 }
 
@@ -143,7 +141,6 @@ fn calculate_scenic_score(tree: u32, col: usize, row: usize, treemap: &Treemap) 
     }
 
     let scenic_score: usize = seen.iter().product();
-
     if scenic_score > treemap.scenic_score {
         return scenic_score;
     }
