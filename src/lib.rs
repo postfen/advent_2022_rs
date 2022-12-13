@@ -23,4 +23,5 @@ pub fn display_solutions() {
     day6::tuningtrouble::print_solution();
     day7::nospaceleftondevice::print_solution();
     day8::treetoptreehouse::print_solution();
+    day9::ropebridge::print_solution();
 }
