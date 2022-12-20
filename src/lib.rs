@@ -24,4 +24,7 @@ pub fn display_solutions() {
     day7::nospaceleftondevice::print_solution();
     day8::treetoptreehouse::print_solution();
     day9::ropebridge::print_solution();
+    day10::crt::print_solution();
+    day11::monkeyinthemiddle::print_solution();
+    day12::hillclimbingalgorithm::print_solution();
 }
